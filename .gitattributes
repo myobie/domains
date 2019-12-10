@@ -1,1 +1,1 @@
-variables.auto.tfvars filter=git-crypt diff=git-crypt
+variables.tfvars filter=git-crypt diff=git-crypt
