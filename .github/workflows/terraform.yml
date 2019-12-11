@@ -39,18 +39,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
-    - name: plan
-      uses: hashicorp/terraform-github-actions@master
-      with:
-        tf_actions_version: 0.12.17
-        tf_actions_subcommand: plan
-        tf_actions_comment: true
-      env:
-        TF_VAR_dnsimple_token: ${{ secrets.TF_VAR_dnsimple_token }}
-        TF_VAR_dnsimple_account: ${{ secrets.TF_VAR_dnsimple_account }}
-        GITHUB_TOKEN: ${{ github.token }}
-
-
   apply:
     name: terraform apply
     runs-on: ubuntu-latest
@@ -79,3 +67,14 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
     needs: setup
+    steps:
+    - name: plan
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: 0.12.17
+        tf_actions_subcommand: plan
+        tf_actions_comment: true
+      env:
+        TF_VAR_dnsimple_token: ${{ secrets.TF_VAR_dnsimple_token }}
+        TF_VAR_dnsimple_account: ${{ secrets.TF_VAR_dnsimple_account }}
+        GITHUB_TOKEN: ${{ github.token }}
