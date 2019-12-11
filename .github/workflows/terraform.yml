@@ -6,8 +6,8 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  setup:
-    name: setup
+  check:
+    name: check
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
@@ -40,7 +40,7 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
 
   apply:
-    name: terraform apply
+    name: apply
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     needs: setup
@@ -74,7 +74,7 @@ jobs:
         fi
 
   plan:
-    name: terraform plan
+    name: plan
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
     needs: setup
