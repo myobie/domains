@@ -7,7 +7,7 @@ variable "dnsimple_account" {
 }
 
 variable "dnsimple_ttl" {
-  type    = number
+  type = number
   default = 3600
 }
 

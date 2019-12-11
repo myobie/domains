@@ -15,22 +15,32 @@ jobs:
       with:
         tf_actions_version: 0.12.17
         tf_actions_subcommand: 'fmt'
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
 
     - name: 'init'
       uses: hashicorp/terraform-github-actions@master
       with:
         tf_actions_version: 0.12.17
         tf_actions_subcommand: 'init'
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
 
     - name: 'validate'
       uses: hashicorp/terraform-github-actions@master
       with:
         tf_actions_version: 0.12.17
         tf_actions_subcommand: 'validate'
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
 
     - name: 'plan'
       uses: hashicorp/terraform-github-actions@master
       with:
         tf_actions_version: 0.12.17
         tf_actions_subcommand: 'plan'
+      env:
+        TF_VAR_dnsimple_token: ${{ secrets.TF_VAR_dnsimple_token }}
+        TF_VAR_dnsimple_account: ${{ secrets.TF_VAR_dnsimple_account }}
+        GITHUB_TOKEN: ${{ github.token }}
 
