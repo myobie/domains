@@ -70,7 +70,10 @@ jobs:
     - name: commit and push
       run: |
         if [[ -n $(git status -s) ]]; then
-          git commit -am 'terraform apply-ed' && git push
+          git config user.email "me@nathanherald.com" && \
+          git config user.name "Nathan Herald" && \
+          git commit -am 'terraform apply-ed' && \
+          git push
         fi
 
   plan:
