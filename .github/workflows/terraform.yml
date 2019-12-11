@@ -1,8 +1,26 @@
 name: terraform
 
-on: [push]
+on:
+  push:
 
 jobs:
+  apply:
+    name: "terraform apply"
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    needs: plan
+
+    steps:
+    - name: 'apply'
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: 0.12.17
+        tf_actions_subcommand: 'apply'
+      env:
+        TF_VAR_dnsimple_token: ${{ secrets.TF_VAR_dnsimple_token }}
+        TF_VAR_dnsimple_account: ${{ secrets.TF_VAR_dnsimple_account }}
+        GITHUB_TOKEN: ${{ github.token }}
+
   plan:
     name: "terraform plan"
     runs-on: ubuntu-latest
