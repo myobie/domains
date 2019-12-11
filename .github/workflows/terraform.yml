@@ -6,35 +6,7 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  apply:
-    name: terraform apply
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
-    needs: plan
-
-    steps:
-    - name: apply
-      uses: hashicorp/terraform-github-actions@master
-      with:
-        tf_actions_version: 0.12.17
-        tf_actions_subcommand: apply
-      env:
-        TF_VAR_dnsimple_token: ${{ secrets.TF_VAR_dnsimple_token }}
-        TF_VAR_dnsimple_account: ${{ secrets.TF_VAR_dnsimple_account }}
-        GITHUB_TOKEN: ${{ github.token }}
-
-    - name: commit and push
-      run: |
-        if [[ -n $(git status -s) ]]; then
-          git commit -am 'terraform apply-ed' && git push
-        fi
-
-  plan:
-    name: terraform plan
-    runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
-
-    steps:
+  setup:
     - uses: actions/checkout@master
 
     - name: format
@@ -75,3 +47,32 @@ jobs:
         TF_VAR_dnsimple_account: ${{ secrets.TF_VAR_dnsimple_account }}
         GITHUB_TOKEN: ${{ github.token }}
 
+
+  apply:
+    name: terraform apply
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    needs: setup
+
+    steps:
+    - name: apply
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: 0.12.17
+        tf_actions_subcommand: apply
+      env:
+        TF_VAR_dnsimple_token: ${{ secrets.TF_VAR_dnsimple_token }}
+        TF_VAR_dnsimple_account: ${{ secrets.TF_VAR_dnsimple_account }}
+        GITHUB_TOKEN: ${{ github.token }}
+
+    - name: commit and push
+      run: |
+        if [[ -n $(git status -s) ]]; then
+          git commit -am 'terraform apply-ed' && git push
+        fi
+
+  plan:
+    name: terraform plan
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    needs: setup
