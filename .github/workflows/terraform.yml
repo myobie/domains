@@ -67,16 +67,11 @@ jobs:
         TF_VAR_dnsimple_account: ${{ secrets.TF_VAR_dnsimple_account }}
         GITHUB_TOKEN: ${{ github.token }}
 
-    - name: output name and email of pusher
-      run: |
-        echo email $(cat ${GITHUB_EVENT_PATH} | jq -r .pusher.name) && \
-        echo name $(cat ${GITHUB_EVENT_PATH} | jq -r .pusher.email)
-
     - name: commit and push
       run: |
         if [[ -n $(git status -s) ]]; then
-          git config user.email "me@nathanherald.com" && \
-          git config user.name "Nathan Herald" && \
+          git config user.email "$(cat ${GITHUB_EVENT_PATH} | jq -r .pusher.email)" && \
+          git config user.name "$(cat ${GITHUB_EVENT_PATH} | jq -r .pusher.name)" && \
           git commit -am 'terraform apply-ed' && \
           git push
         fi
