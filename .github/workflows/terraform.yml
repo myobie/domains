@@ -18,7 +18,6 @@ jobs:
       with:
         tf_actions_version: 0.12.17
         tf_actions_subcommand: 'apply'
-        tf_actions_comment: true
       env:
         TF_VAR_dnsimple_token: ${{ secrets.TF_VAR_dnsimple_token }}
         TF_VAR_dnsimple_account: ${{ secrets.TF_VAR_dnsimple_account }}
@@ -30,11 +29,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@master
-
-    - name: Dump GitHub context
-      run: echo event $G_EVENT
-      env:
-        G_EVENT: ${{ toJson(github) }}
 
     - name: 'format'
       uses: hashicorp/terraform-github-actions@master
