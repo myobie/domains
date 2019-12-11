@@ -32,7 +32,7 @@ jobs:
     - name: Dump GitHub context
       run: echo event $G_EVENT
       env:
-        G_EVENT: ${{ github.event_name }}
+        G_EVENT: ${{ toJson(github) }}
 
     - name: 'format'
       uses: hashicorp/terraform-github-actions@master
