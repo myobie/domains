@@ -29,6 +29,11 @@ jobs:
     steps:
     - uses: actions/checkout@master
 
+    - name: Dump GitHub context
+      env:
+        EVENT: ${{ toJson(github.event) }}
+      run: echo "event: $EVENT"
+
     - name: 'format'
       uses: hashicorp/terraform-github-actions@master
       with:
