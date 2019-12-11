@@ -98,3 +98,11 @@ resource "dnsimple_record" "txt_now_token" {
   value  = "QmTHxd3KVZWrWGg3WsrS99LkNrsTAuHuNufJfhPnrYFjEo"
   ttl    = var.dnsimple_ttl
 }
+
+resource "dnsimple_record" "txt_nathan_test" {
+  type   = "TXT"
+  domain = "nathanherald.com"
+  name   = "_actions"
+  value  = "works"
+  ttl    = var.dnsimple_ttl
+}
