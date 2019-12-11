@@ -2,66 +2,92 @@ name: terraform
 
 on:
   push:
+  issue_comment:
+    types: [created]
   pull_request:
     types: [opened, synchronize]
 
 jobs:
   apply:
-    name: "terraform apply"
+    name: terraform apply
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     needs: plan
 
     steps:
-    - name: 'apply'
+    - name: apply
       uses: hashicorp/terraform-github-actions@master
       with:
         tf_actions_version: 0.12.17
-        tf_actions_subcommand: 'apply'
+        tf_actions_subcommand: apply
       env:
         TF_VAR_dnsimple_token: ${{ secrets.TF_VAR_dnsimple_token }}
         TF_VAR_dnsimple_account: ${{ secrets.TF_VAR_dnsimple_account }}
         GITHUB_TOKEN: ${{ github.token }}
 
-  plan:
-    name: "terraform plan"
+  fmt:
+    name: "terraform fmt and commit"
     runs-on: ubuntu-latest
+    if: github.event_name == 'issue_comment'
 
     steps:
     - uses: actions/checkout@master
 
-    - name: 'format'
+    - name: logging
+      run: echo event $G_EVENT
+      env:
+        G_EVENT: ${{ toJson(github) }}
+
+    # - name: fmt
+    #   run: terraform fmt
+
+    # - name: commit
+    #   run: git commit -am 'terraform fmt'
+
+    # - name: push
+    #   run: git push
+
+
+  plan:
+    name: terraform plan
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+    - uses: actions/checkout@master
+
+    - name: format
       uses: hashicorp/terraform-github-actions@master
       with:
         tf_actions_version: 0.12.17
-        tf_actions_subcommand: 'fmt'
+        tf_actions_subcommand: fmt
         tf_actions_comment: true
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
-    - name: 'init'
+    - name: init
       uses: hashicorp/terraform-github-actions@master
       with:
         tf_actions_version: 0.12.17
-        tf_actions_subcommand: 'init'
+        tf_actions_subcommand: init
         tf_actions_comment: true
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
-    - name: 'validate'
+    - name: validate
       uses: hashicorp/terraform-github-actions@master
       with:
         tf_actions_version: 0.12.17
-        tf_actions_subcommand: 'validate'
+        tf_actions_subcommand: validate
         tf_actions_comment: true
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
-    - name: 'plan'
+    - name: plan
       uses: hashicorp/terraform-github-actions@master
       with:
         tf_actions_version: 0.12.17
-        tf_actions_subcommand: 'plan'
+        tf_actions_subcommand: plan
         tf_actions_comment: true
       env:
         TF_VAR_dnsimple_token: ${{ secrets.TF_VAR_dnsimple_token }}
