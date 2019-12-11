@@ -25,28 +25,11 @@ jobs:
         TF_VAR_dnsimple_account: ${{ secrets.TF_VAR_dnsimple_account }}
         GITHUB_TOKEN: ${{ github.token }}
 
-  fmt:
-    name: "terraform fmt and commit"
-    runs-on: ubuntu-latest
-    if: github.event_name == 'issue_comment'
-
-    steps:
-    - uses: actions/checkout@master
-
-    - name: logging
-      run: echo event $G_EVENT
-      env:
-        G_EVENT: ${{ toJson(github) }}
-
-    # - name: fmt
-    #   run: terraform fmt
-
-    # - name: commit
-    #   run: git commit -am 'terraform fmt'
-
-    # - name: push
-    #   run: git push
-
+    - name: commit and push
+      run: |
+        if [[ -n $(git status -s) ]]; then
+          git commit -am 'terraform apply-ed' && git push
+        fi
 
   plan:
     name: terraform plan
