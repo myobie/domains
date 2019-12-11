@@ -46,6 +46,17 @@ jobs:
     needs: setup
 
     steps:
+    - uses: actions/checkout@master
+
+    - name: init
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: 0.12.17
+        tf_actions_subcommand: init
+        tf_actions_comment: true
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
     - name: apply
       uses: hashicorp/terraform-github-actions@master
       with:
@@ -68,6 +79,17 @@ jobs:
     if: github.event_name == 'pull_request'
     needs: setup
     steps:
+    - uses: actions/checkout@master
+
+    - name: init
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: 0.12.17
+        tf_actions_subcommand: init
+        tf_actions_comment: true
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
     - name: plan
       uses: hashicorp/terraform-github-actions@master
       with:
