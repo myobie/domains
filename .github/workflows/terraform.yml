@@ -43,7 +43,7 @@ jobs:
     name: apply
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
-    needs: setup
+    needs: check
 
     steps:
     - uses: actions/checkout@master
@@ -77,7 +77,7 @@ jobs:
     name: plan
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
-    needs: setup
+    needs: check
     steps:
     - uses: actions/checkout@master
 
