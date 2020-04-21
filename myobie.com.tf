@@ -75,13 +75,13 @@ resource "dnsimple_record" "myobie_com_txt_soverin_spf" {
   ttl    = var.dnsimple_ttl
 }
 
-# resource "dnsimple_record" "myobie_com_txt_soverin_domainkey" {
-#   type   = "TXT"
-#   domain = "myobie.com"
-#   name   = "soverin._domainkey"
-#   value  = ""
-#   ttl    = var.dnsimple_ttl
-# }
+resource "dnsimple_record" "myobie_com_txt_soverin_domainkey" {
+  type   = "TXT"
+  domain = "myobie.com"
+  name   = "soverin._domainkey"
+  value  = "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmuU0yFGQxRa6AJAIqzY75z6t3VW2UMIjpiJQzv0ugB2tkKw555MJwO4AiFcEdQYsuCJJyqD+pwAHa2Y6nXS8y6+yutlP2PoZgSoERaPBbjytLxQUwRKoX/jOg1xJ9V1d4yQsP1GJtJGp+gCrLLsowxv0HlZrXMsKkSXMzE9idqHVubWy/uYRKVEi15ROIOKz6Y1B1Jj6XoYo88WTPy4cn8Mvd93Ts3XzE9eYTLMsp6hQrJK/Ou2PKoK2zA2yf0Y0gasqb0slI8miIhNiVF815skQ7Tvu5AX0T00jh0rMrILJSqjkitKbqq42FUtqNfCgXv8IrCdqjbxCkgMpc6Xx3QIDAQAB"
+  ttl    = var.dnsimple_ttl
+}
 
 # resource "dnsimple_record" "myobie_com_txt_now_token" {
 #   type   = "TXT"
