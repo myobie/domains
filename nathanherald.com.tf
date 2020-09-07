@@ -2,7 +2,7 @@ resource "dnsimple_record" "root_alias" {
   type   = "ALIAS"
   domain = "nathanherald.com"
   name   = ""
-  value  = "alias.zeit.co"
+  value  = "flamboyant-northcutt-4eefaf.netlify.app"
   ttl    = var.dnsimple_ttl
 }
 
@@ -28,7 +28,7 @@ resource "dnsimple_record" "www_cname" {
   type   = "CNAME"
   domain = "nathanherald.com"
   name   = "www"
-  value  = "alias.zeit.co"
+  value  = "flamboyant-northcutt-4eefaf.netlify.app"
   ttl    = var.dnsimple_ttl
 }
 
