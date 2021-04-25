@@ -106,3 +106,11 @@ resource "dnsimple_record" "txt_nathan_test" {
   value  = "works"
   ttl    = var.dnsimple_ttl
 }
+
+resource "dnsimple_record" "txt_hey_verification" {
+  type   = "TXT"
+  domain = "nathanherald.com"
+  name   = ""
+  value  = "hey-verification:y5Vmkr1f5B7Dbs4PfKdcQX7q"
+  ttl    = var.dnsimple_ttl
+}
