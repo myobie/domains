@@ -83,6 +83,14 @@ resource "dnsimple_record" "txt_hey_dmark" {
   ttl    = var.dnsimple_ttl
 }
 
+resource "dnsimple_record" "cname_hey_domainkey" {
+  type   = "CNAME"
+  domain = "nathanherald.com"
+  name   = "heymail._domainkey"
+  value  = "heymail._domainkey.hey.com"
+  ttl    = var.dnsimple_ttl
+}
+
 # -*- TODO: Remove soverin records 👇 -*-
 
 resource "dnsimple_record" "txt_soverin_verificaton" {
