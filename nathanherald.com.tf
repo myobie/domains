@@ -59,19 +59,37 @@ resource "dnsimple_record" "mx_3_soverin" {
   ttl      = var.dnsimple_ttl
 }
 
+resource "dnsimple_record" "txt_hey_verification" {
+  type   = "TXT"
+  domain = "nathanherald.com"
+  name   = ""
+  value  = "hey-verification:y5Vmkr1f5B7Dbs4PfKdcQX7q"
+  ttl    = var.dnsimple_ttl
+}
+
+resource "dnsimple_record" "txt_hey_spf" {
+  type   = "TXT"
+  domain = "nathanherald.com"
+  name   = ""
+  value  = "v=spf1 +a include:_spf.hey.com ~all"
+  ttl    = var.dnsimple_ttl
+}
+
+resource "dnsimple_record" "txt_hey_dmark" {
+  type   = "TXT"
+  domain = "nathanherald.com"
+  name   = "_dmarc"
+  value  = "v=DMARC1; p=none;"
+  ttl    = var.dnsimple_ttl
+}
+
+# -*- TODO: Remove soverin records 👇 -*-
+
 resource "dnsimple_record" "txt_soverin_verificaton" {
   type   = "TXT"
   domain = "nathanherald.com"
   name   = ""
   value  = "Soverin-site-verification=G7WnxsP7RuSFmUx1"
-  ttl    = var.dnsimple_ttl
-}
-
-resource "dnsimple_record" "txt_soverin_spf" {
-  type   = "TXT"
-  domain = "nathanherald.com"
-  name   = ""
-  value  = "v=spf1 +a include:soverin.net ~all"
   ttl    = var.dnsimple_ttl
 }
 
@@ -82,6 +100,8 @@ resource "dnsimple_record" "txt_soverin_domainkey" {
   value  = "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA052NncuQWFqM3Kx2IrnTpYdjbzFiffKgKz9034vD0VS5QKw2rKkW5rsGXLJQhnfWVNUAEV6IY71cfq85Y0ewXUucajIKLF6xZXaVX/yh/u/4PvbQS2QIa5jB60urfIwNiFsxHzz71aHPbtnp/n1MRqgxOYw/eEm/SwfDpi4moLd5n2k6iYBDecNhzodQVdj3X09bD/tYJHGJzI3L7xq0AeuE3buquDGypHMpu3HIvXMafpufFylhmTJwyFfPJdwq7REwlEH0/UerZdnA/kj/3u5ApAVlxmvZwhgUxYfpNRiZnAIlB4AOoJHCeA/xpupT/lImrHWJSKvetkjxm3dKZwIDAQAB"
   ttl    = var.dnsimple_ttl
 }
+
+# -*- TODO: Remove soverin records 👆 -*-
 
 resource "dnsimple_record" "txt_keybase_verification" {
   type   = "TXT"
@@ -104,13 +124,5 @@ resource "dnsimple_record" "txt_nathan_test" {
   domain = "nathanherald.com"
   name   = "_actions"
   value  = "works"
-  ttl    = var.dnsimple_ttl
-}
-
-resource "dnsimple_record" "txt_hey_verification" {
-  type   = "TXT"
-  domain = "nathanherald.com"
-  name   = ""
-  value  = "hey-verification:y5Vmkr1f5B7Dbs4PfKdcQX7q"
   ttl    = var.dnsimple_ttl
 }
