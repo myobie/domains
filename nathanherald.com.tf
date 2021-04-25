@@ -32,30 +32,12 @@ resource "dnsimple_record" "www_cname" {
   ttl    = var.dnsimple_ttl
 }
 
-resource "dnsimple_record" "mx_1_soverin" {
+resource "dnsimple_record" "mx_1_hey" {
   type     = "MX"
-  priority = 1
+  priority = 10
   domain   = "nathanherald.com"
   name     = ""
-  value    = "mx.soverin.net"
-  ttl      = var.dnsimple_ttl
-}
-
-resource "dnsimple_record" "mx_2_soverin" {
-  type     = "MX"
-  priority = 2
-  domain   = "nathanherald.com"
-  name     = ""
-  value    = "mx02.soverin.net"
-  ttl      = var.dnsimple_ttl
-}
-
-resource "dnsimple_record" "mx_3_soverin" {
-  type     = "MX"
-  priority = 3
-  domain   = "nathanherald.com"
-  name     = ""
-  value    = "mx03.soverin.net"
+  value    = "work-mx.app.hey.com"
   ttl      = var.dnsimple_ttl
 }
 
