@@ -32,32 +32,34 @@ resource "dnsimple_record" "www_cname" {
   ttl    = var.dnsimple_ttl
 }
 
-resource "dnsimple_record" "mx_1_hey" {
+resource "dnsimple_record" "mx_1_fastmail" {
   type     = "MX"
   priority = 10
   domain   = "nathanherald.com"
   name     = ""
-  value    = "work-mx.app.hey.com"
+  value    = "in1-smtp.messagingengine.com"
   ttl      = var.dnsimple_ttl
 }
 
-resource "dnsimple_record" "txt_hey_verification" {
+resource "dnsimple_record" "mx_2_fastmail" {
+  type     = "MX"
+  priority = 20
+  domain   = "nathanherald.com"
+  name     = ""
+  value    = "in2-smtp.messagingengine.com"
+  ttl      = var.dnsimple_ttl
+}
+
+resource "dnsimple_record" "txt_fastmail_spf" {
   type   = "TXT"
   domain = "nathanherald.com"
   name   = ""
-  value  = "hey-verification:y5Vmkr1f5B7Dbs4PfKdcQX7q"
+  value  = "v=spf1 include:spf.messagingengine.com ?all"
   ttl    = var.dnsimple_ttl
 }
 
-resource "dnsimple_record" "txt_hey_spf" {
-  type   = "TXT"
-  domain = "nathanherald.com"
-  name   = ""
-  value  = "v=spf1 +a include:_spf.hey.com ~all"
-  ttl    = var.dnsimple_ttl
-}
-
-resource "dnsimple_record" "txt_hey_dmark" {
+# TODO: do I still need this?
+resource "dnsimple_record" "txt_dmark" {
   type   = "TXT"
   domain = "nathanherald.com"
   name   = "_dmarc"
@@ -65,54 +67,34 @@ resource "dnsimple_record" "txt_hey_dmark" {
   ttl    = var.dnsimple_ttl
 }
 
-resource "dnsimple_record" "cname_hey_domainkey" {
+resource "dnsimple_record" "cname_1_fastmail_domainkey" {
   type   = "CNAME"
   domain = "nathanherald.com"
-  name   = "heymail._domainkey"
-  value  = "heymail._domainkey.hey.com"
+  name   = "fm1._domainkey"
+  value  = "fm1.nathanherald.com.dkim.fmhosted.com"
   ttl    = var.dnsimple_ttl
 }
 
-# -*- TODO: Remove soverin records 👇 -*-
-
-resource "dnsimple_record" "txt_soverin_verificaton" {
-  type   = "TXT"
+resource "dnsimple_record" "cname_2_fastmail_domainkey" {
+  type   = "CNAME"
   domain = "nathanherald.com"
-  name   = ""
-  value  = "Soverin-site-verification=G7WnxsP7RuSFmUx1"
+  name   = "fm2._domainkey"
+  value  = "fm2.nathanherald.com.dkim.fmhosted.com"
   ttl    = var.dnsimple_ttl
 }
 
-resource "dnsimple_record" "txt_soverin_domainkey" {
-  type   = "TXT"
+resource "dnsimple_record" "cname_3_fastmail_domainkey" {
+  type   = "CNAME"
   domain = "nathanherald.com"
-  name   = "soverin._domainkey"
-  value  = "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA052NncuQWFqM3Kx2IrnTpYdjbzFiffKgKz9034vD0VS5QKw2rKkW5rsGXLJQhnfWVNUAEV6IY71cfq85Y0ewXUucajIKLF6xZXaVX/yh/u/4PvbQS2QIa5jB60urfIwNiFsxHzz71aHPbtnp/n1MRqgxOYw/eEm/SwfDpi4moLd5n2k6iYBDecNhzodQVdj3X09bD/tYJHGJzI3L7xq0AeuE3buquDGypHMpu3HIvXMafpufFylhmTJwyFfPJdwq7REwlEH0/UerZdnA/kj/3u5ApAVlxmvZwhgUxYfpNRiZnAIlB4AOoJHCeA/xpupT/lImrHWJSKvetkjxm3dKZwIDAQAB"
+  name   = "fm3._domainkey"
+  value  = "fm3.nathanherald.com.dkim.fmhosted.com"
   ttl    = var.dnsimple_ttl
 }
-
-# -*- TODO: Remove soverin records 👆 -*-
 
 resource "dnsimple_record" "txt_keybase_verification" {
   type   = "TXT"
   domain = "nathanherald.com"
   name   = ""
   value  = "keybase-site-verification=4g5_Bp5HvFACfUkKCF6myxa43gFF1l0Ht3dUtd4zbQM"
-  ttl    = var.dnsimple_ttl
-}
-
-resource "dnsimple_record" "txt_now_token" {
-  type   = "TXT"
-  domain = "nathanherald.com"
-  name   = "_now"
-  value  = "QmTHxd3KVZWrWGg3WsrS99LkNrsTAuHuNufJfhPnrYFjEo"
-  ttl    = var.dnsimple_ttl
-}
-
-resource "dnsimple_record" "txt_nathan_test" {
-  type   = "TXT"
-  domain = "nathanherald.com"
-  name   = "_actions"
-  value  = "works"
   ttl    = var.dnsimple_ttl
 }
