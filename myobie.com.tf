@@ -24,6 +24,30 @@ resource "dnsimple_record" "myobie_com_caa_provider" {
   ttl      = var.dnsimple_ttl
 }
 
+resource "dnsimple_record" "myobie_com_cname_fm1_domainkey" {
+  type   = "CNAME"
+  domain = "myobie.com"
+  name   = "fm1._domainkey"
+  value  = "fm1.myobie.com.dkim.fmhosted.com"
+  ttl    = var.dnsimple_ttl
+}
+
+resource "dnsimple_record" "myobie_com_cname_fm2_domainkey" {
+  type   = "CNAME"
+  domain = "myobie.com"
+  name   = "fm2._domainkey"
+  value  = "fm2.myobie.com.dkim.fmhosted.com"
+  ttl    = var.dnsimple_ttl
+}
+
+resource "dnsimple_record" "myobie_com_cname_fm3_domainkey" {
+  type   = "CNAME"
+  domain = "myobie.com"
+  name   = "fm3._domainkey"
+  value  = "fm3.myobie.com.dkim.fmhosted.com"
+  ttl    = var.dnsimple_ttl
+}
+
 resource "dnsimple_record" "myobie_com_www_cname" {
   type   = "CNAME"
   domain = "myobie.com"
@@ -32,61 +56,45 @@ resource "dnsimple_record" "myobie_com_www_cname" {
   ttl    = var.dnsimple_ttl
 }
 
-resource "dnsimple_record" "myobie_com_mx_1_soverin" {
+resource "dnsimple_record" "myobie_com_mx_1_fastmail" {
   type     = "MX"
-  priority = 1
   domain   = "myobie.com"
   name     = ""
-  value    = "mx.soverin.net"
+  value    = "in1-smtp.messagingengine.com"
+  priority = 10
   ttl      = var.dnsimple_ttl
 }
 
-resource "dnsimple_record" "myobie_com_mx_2_soverin" {
+resource "dnsimple_record" "myobie_com_mx_2_fastmail" {
   type     = "MX"
-  priority = 2
   domain   = "myobie.com"
   name     = ""
-  value    = "mx02.soverin.net"
+  value    = "in2-smtp.messagingengine.com"
+  priority = 20
   ttl      = var.dnsimple_ttl
 }
 
-resource "dnsimple_record" "myobie_com_mx_3_soverin" {
-  type     = "MX"
-  priority = 3
-  domain   = "myobie.com"
-  name     = ""
-  value    = "mx03.soverin.net"
-  ttl      = var.dnsimple_ttl
-}
-
-resource "dnsimple_record" "myobie_com_txt_soverin_verificaton" {
+resource "dnsimple_record" "myobie_com_txt_zeit" {
   type   = "TXT"
   domain = "myobie.com"
   name   = ""
-  value  = "Soverin=2gPmdBHiez5h58uy"
+  value  = "ALIAS for alias.zeit.co"
   ttl    = var.dnsimple_ttl
 }
 
-resource "dnsimple_record" "myobie_com_txt_soverin_spf" {
+resource "dnsimple_record" "myobie_com_txt_fastmail_spf" {
   type   = "TXT"
   domain = "myobie.com"
   name   = ""
-  value  = "v=spf1 +a include:soverin.net ~all"
+  value  = "v=spf1 include:spf.messagingengine.com ?all"
   ttl    = var.dnsimple_ttl
 }
 
-resource "dnsimple_record" "myobie_com_txt_soverin_domainkey" {
+resource "dnsimple_record" "myobie_com_txt_fastmail_dmarc" {
   type   = "TXT"
   domain = "myobie.com"
-  name   = "soverin._domainkey"
-  value  = "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmuU0yFGQxRa6AJAIqzY75z6t3VW2UMIjpiJQzv0ugB2tkKw555MJwO4AiFcEdQYsuCJJyqD+pwAHa2Y6nXS8y6+yutlP2PoZgSoERaPBbjytLxQUwRKoX/jOg1xJ9V1d4yQsP1GJtJGp+gCrLLsowxv0HlZrXMsKkSXMzE9idqHVubWy/uYRKVEi15ROIOKz6Y1B1Jj6XoYo88WTPy4cn8Mvd93Ts3XzE9eYTLMsp6hQrJK/Ou2PKoK2zA2yf0Y0gasqb0slI8miIhNiVF815skQ7Tvu5AX0T00jh0rMrILJSqjkitKbqq42FUtqNfCgXv8IrCdqjbxCkgMpc6Xx3QIDAQAB"
+  name   = "_dmarc"
+  value  = "v=DMARC1; p=none;"
   ttl    = var.dnsimple_ttl
 }
 
-# resource "dnsimple_record" "myobie_com_txt_now_token" {
-#   type   = "TXT"
-#   domain = "myobie.com"
-#   name   = "_now"
-#   value  = ""
-#   ttl    = var.dnsimple_ttl
-# }

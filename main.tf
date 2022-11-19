@@ -12,7 +12,17 @@ variable "dnsimple_ttl" {
 }
 
 provider "dnsimple" {
-  version = "~> 0.2"
   token   = var.dnsimple_token
   account = var.dnsimple_account
+}
+
+terraform {
+  required_providers {
+    dnsimple = {
+      version = "~> 0.9"
+      source  = "dnsimple/dnsimple"
+    }
+  }
+
+  required_version = "~> 1.3.0"
 }
