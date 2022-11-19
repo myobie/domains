@@ -32,6 +32,14 @@ resource "dnsimple_record" "www_cname" {
   ttl    = var.dnsimple_ttl
 }
 
+resource "dnsimple_record" "tumblr_cname" {
+  type   = "CNAME"
+  domain = "nathanherald.com"
+  name   = "tumblr"
+  value  = "domains.tumblr.com"
+  ttl    = var.dnsimple_ttl
+}
+
 resource "dnsimple_record" "mx_1_fastmail" {
   type     = "MX"
   priority = 10
