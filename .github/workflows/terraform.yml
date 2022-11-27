@@ -45,7 +45,7 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
 
   plan:
-    name: check
+    name: plan
     runs-on: ubuntu-latest
     needs: check
     steps:
