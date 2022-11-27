@@ -12,7 +12,8 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - run: |
-        rm "${{ github.workspace }}/tfstate.*"
+        rm "${{ github.workspace }}/terraform.tfstate"
+        rm "${{ github.workspace }}/terraform.tfstate.*"
 
     - name: format
       uses: hashicorp/terraform-github-actions@master
