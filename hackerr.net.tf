@@ -6,6 +6,14 @@ resource "dnsimple_record" "hacker_net_root_alias" {
   ttl    = var.dnsimple_ttl
 }
 
+resource "dnsimple_record" "hacker_net_www_cname" {
+  type   = "CNAME"
+  domain = "hackerr.net"
+  name   = "www"
+  value  = "fluffy-lolly-7bc09f.netlify.app"
+  ttl    = var.dnsimple_ttl
+}
+
 resource "dnsimple_record" "hackerr_net_caa_email" {
   type     = "CAA"
   priority = 0
