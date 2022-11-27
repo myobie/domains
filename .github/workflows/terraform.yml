@@ -47,7 +47,7 @@ jobs:
   plan:
     name: check
     runs-on: ubuntu-latest
-    depends-on: check
+    needs: check
     steps:
     - uses: actions/checkout@master
 
