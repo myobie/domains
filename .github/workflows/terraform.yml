@@ -11,7 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - run: rm ${{ github.workspace }}/tfstate.*
+    - run: |
+        rm "${{ github.workspace }}/tfstate.*"
 
     - name: format
       uses: hashicorp/terraform-github-actions@master
