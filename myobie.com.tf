@@ -11,7 +11,7 @@ resource "dnsimple_record" "myobie_com_caa_email" {
   priority = 0
   domain   = "myobie.com"
   name     = ""
-  value    = "0 iodef \"mailto:me@nathanherald.com\""
+  value    = "0 iodef \"mailto:nathan@myobie.com\""
   ttl      = var.dnsimple_ttl
 }
 
