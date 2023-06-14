@@ -2,7 +2,7 @@ resource "dnsimple_record" "myobie_com_root_alias" {
   type   = "ALIAS"
   domain = "myobie.com"
   name   = ""
-  value  = "alias.zeit.co"
+  value  = "apex-loadbalancer.netlify.com"
   ttl    = var.dnsimple_ttl
 }
 
@@ -52,7 +52,7 @@ resource "dnsimple_record" "myobie_com_www_cname" {
   type   = "CNAME"
   domain = "myobie.com"
   name   = "www"
-  value  = "alias.zeit.co"
+  value  = "flamboyant-northcutt-4eefaf.netlify.app"
   ttl    = var.dnsimple_ttl
 }
 
@@ -74,14 +74,6 @@ resource "dnsimple_record" "myobie_com_mx_2_fastmail" {
   ttl      = var.dnsimple_ttl
 }
 
-resource "dnsimple_record" "myobie_com_txt_zeit" {
-  type   = "TXT"
-  domain = "myobie.com"
-  name   = ""
-  value  = "ALIAS for alias.zeit.co"
-  ttl    = var.dnsimple_ttl
-}
-
 resource "dnsimple_record" "myobie_com_txt_fastmail_spf" {
   type   = "TXT"
   domain = "myobie.com"
@@ -98,3 +90,10 @@ resource "dnsimple_record" "myobie_com_txt_fastmail_dmarc" {
   ttl    = var.dnsimple_ttl
 }
 
+resource "dnsimple_record" "myobie_com_txt_atproto" {
+  type   = "TXT"
+  domain = "myobie.com"
+  name   = "_atproto"
+  value  = "did=did:plc:zlfush6rr7hutllznnzxxulj"
+  ttl    = var.dnsimple_ttl
+}
