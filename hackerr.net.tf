@@ -78,7 +78,7 @@ resource "dnsimple_zone_record" "hackerr_net_txt_fastmail_spf" {
   type   = "TXT"
   zone_name = "hackerr.net"
   name   = ""
-  value  = "v=spf1 include:spf.messagingengine.com ?all"
+  value  = "\"v=spf1 include:spf.messagingengine.com ?all\""
   ttl    = var.dnsimple_ttl
 }
 
@@ -86,7 +86,7 @@ resource "dnsimple_zone_record" "hackerr_net_txt_fastmail_dmarc" {
   type   = "TXT"
   zone_name = "hackerr.net"
   name   = "_dmarc"
-  value  = "v=DMARC1; p=none;"
+  value  = "\"v=DMARC1; p=none;\""
   ttl    = var.dnsimple_ttl
 }
 

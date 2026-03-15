@@ -62,7 +62,7 @@ resource "dnsimple_zone_record" "txt_fastmail_spf" {
   type   = "TXT"
   zone_name = "nathanherald.com"
   name   = ""
-  value  = "v=spf1 include:spf.messagingengine.com ?all"
+  value  = "\"v=spf1 include:spf.messagingengine.com ?all\""
   ttl    = var.dnsimple_ttl
 }
 
@@ -71,7 +71,7 @@ resource "dnsimple_zone_record" "txt_dmark" {
   type   = "TXT"
   zone_name = "nathanherald.com"
   name   = "_dmarc"
-  value  = "v=DMARC1; p=none;"
+  value  = "\"v=DMARC1; p=none;\""
   ttl    = var.dnsimple_ttl
 }
 
@@ -103,7 +103,7 @@ resource "dnsimple_zone_record" "txt_keybase_verification" {
   type   = "TXT"
   zone_name = "nathanherald.com"
   name   = ""
-  value  = "keybase-site-verification=4g5_Bp5HvFACfUkKCF6myxa43gFF1l0Ht3dUtd4zbQM"
+  value  = "\"keybase-site-verification=4g5_Bp5HvFACfUkKCF6myxa43gFF1l0Ht3dUtd4zbQM\""
   ttl    = var.dnsimple_ttl
 }
 
@@ -111,6 +111,15 @@ resource "dnsimple_zone_record" "txt_atproto" {
   type   = "TXT"
   zone_name = "nathanherald.com"
   name   = "_atproto"
-  value  = "did=did:plc:zlfush6rr7hutllznnzxxulj"
+  value  = "\"did=did:plc:zlfush6rr7hutllznnzxxulj\""
+  ttl    = var.dnsimple_ttl
+}
+
+# TODO: not sure what this is for
+resource "dnsimple_zone_record" "txt_openai_verification" {
+  type   = "TXT"
+  zone_name = "nathanherald.com"
+  name   = ""
+  value  = "\"openai-domain-verification=dv-EOuDW9lGO2PsMwo6VogmD6SE\""
   ttl    = var.dnsimple_ttl
 }

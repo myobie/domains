@@ -16,27 +16,26 @@ provider "dnsimple" {
   account = var.dnsimple_account
 }
 
-variable "github_pat" {
+variable "cloudflare_api_token" {
   type = string
 }
 
-provider "github" {
-  owner = "myobie"
-  token = var.github_pat
+provider "cloudflare" {
+  api_token = var.cloudflare_api_token
 }
 
 terraform {
   required_providers {
     dnsimple = {
-      version = "~> 1.7"
+      version = "~> 2.0"
       source  = "dnsimple/dnsimple"
     }
 
-    github = {
-      version = "5.8.0"
-      source  = "integrations/github"
+    cloudflare = {
+      version = "~> 5.18"
+      source  = "cloudflare/cloudflare"
     }
   }
 
-  required_version = "~> 1.5.0"
+  required_version = ">= 1.5.0"
 }
