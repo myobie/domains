@@ -28,7 +28,7 @@ provider "github" {
 terraform {
   required_providers {
     dnsimple = {
-      version = "~> 0.9"
+      version = "~> 1.7"
       source  = "dnsimple/dnsimple"
     }
 
@@ -38,5 +38,5 @@ terraform {
     }
   }
 
-  required_version = "~> 1.4.0"
+  required_version = "~> 1.5.0"
 }
